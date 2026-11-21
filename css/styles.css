@@ -14,7 +14,7 @@
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif; 
+  font-family: Arial, Helvetica, sans-serif;    
   background: var(--color-fondo);
   color: #333;                                
 }
@@ -42,4 +42,64 @@ nav a {
 
 nav a:hover {
   text-decoration: underline;  
+}
+
+main {
+  padding: 32px 24px;
+}
+
+.tarjeta {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: var(--radio);
+  padding: 24px;
+}
+
+.login {
+  max-width: 360px;
+  margin: 40px auto;      /* auto a los lados = centrado */
+  text-align: center;
+}
+
+.login h2 {
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column; /* los campos uno debajo del otro */
+  gap: 12px;
+}
+
+input, select, textarea {
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 20px;    /* redondeados como en su diseño */
+  font-size: 14px;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--color-principal);
+}
+
+.btn {
+  background: var(--color-principal);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;        /* manito al pasar el mouse */
+  transition: background 0.2s;
+}
+
+.btn:hover {
+  background: var(--color-oscuro);
+}
+
+.error {
+  color: var(--color-error);
+  font-size: 13px;
+  min-height: 16px;       /* reserva el espacio para que no salte el formulario */
 }

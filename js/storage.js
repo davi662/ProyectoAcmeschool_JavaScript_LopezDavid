@@ -1,4 +1,3 @@
-// ===== Funciones base =====
 function leer(clave) {
   return JSON.parse(localStorage.getItem(clave)) || [];
 }
@@ -6,9 +5,6 @@ function leer(clave) {
 function guardar(clave, datos) {
   localStorage.setItem(clave, JSON.stringify(datos));
 }
-
-// ===== CRUD genérico =====
-// Sirven para usuarios ("users", campo "id") y exámenes ("exams", campo "codigo")
 
 function agregar(clave, item) {
   const lista = leer(clave);
@@ -32,8 +28,6 @@ function actualizar(clave, campo, itemEditado) {
   guardar(clave, nuevaLista);
 }
 
-// ===== Datos iniciales =====
-// Si no hay usuarios, crea el admin para poder entrar la primera vez
 function inicializarDatos() {
   if (leer("users").length === 0) {
     agregar("users", {
