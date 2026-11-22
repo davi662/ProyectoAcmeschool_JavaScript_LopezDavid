@@ -82,9 +82,7 @@ function vistaInicio() {
   app.innerHTML = `<section class="tarjeta"><h2>Exámenes disponibles</h2><p>Próximamente…</p></section>`;
 }
 
-function vistaUsuarios() {
-  app.innerHTML = `<section class="tarjeta"><h2>Gestión de usuarios</h2><p>Bienvenido, ${usuarioActual().nombre}</p></section>`;
-}
+
 
 function vistaGestionExamenes() {
   app.innerHTML = `<section class="tarjeta"><h2>Gestión de exámenes</h2><p>Próximamente…</p></section>`;
