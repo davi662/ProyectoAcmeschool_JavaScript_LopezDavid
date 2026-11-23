@@ -83,7 +83,3 @@ function vistaInicio() {
 }
 
 
-
-function vistaGestionExamenes() {
-  app.innerHTML = `<section class="tarjeta"><h2>Gestión de exámenes</h2><p>Próximamente…</p></section>`;
-}

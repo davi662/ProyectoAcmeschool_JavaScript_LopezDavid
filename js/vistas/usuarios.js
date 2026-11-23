@@ -1,4 +1,3 @@
-// Guarda el id del usuario que se está editando. null = estamos creando uno nuevo.
 let usuarioEditando = null;
 
 function vistaUsuarios() {
@@ -47,7 +46,6 @@ function vistaUsuarios() {
   document.getElementById("form-usuario").addEventListener("submit", guardarUsuario);
   document.getElementById("btn-cancelar-usuario").addEventListener("click", limpiarFormularioUsuario);
 
-  // UN solo listener para todos los botones de la tabla (delegación de eventos)
   document.getElementById("tabla-usuarios").addEventListener("click", (e) => {
     const boton = e.target.closest("button");
     if (!boton) return;
@@ -58,7 +56,6 @@ function vistaUsuarios() {
   });
 }
 
-// ===== Pintar la tabla =====
 function pintarTablaUsuarios() {
   const usuarios = leer("users");
 
@@ -77,7 +74,6 @@ function pintarTablaUsuarios() {
   `).join("");
 }
 
-// ===== Crear o actualizar =====
 function guardarUsuario(e) {
   e.preventDefault();
   const error = document.getElementById("error-usuario");
@@ -91,7 +87,6 @@ function guardarUsuario(e) {
     password: document.getElementById("u-password").value
   };
 
-  // El email no puede estar repetido (salvo que sea el mismo usuario que estamos editando)
   const conEseEmail = buscar("users", "email", usuario.email);
   if (conEseEmail && conEseEmail.id !== usuarioEditando) {
     error.textContent = "Ya existe un usuario con ese email";
@@ -99,14 +94,12 @@ function guardarUsuario(e) {
   }
 
   if (usuarioEditando === null) {
-    // CREANDO
     if (buscar("users", "id", usuario.id)) {
       error.textContent = "Ya existe un usuario con esa identificación";
       return;
     }
     agregar("users", usuario);
   } else {
-    // EDITANDO
     actualizar("users", "id", usuario);
   }
 
@@ -114,13 +107,12 @@ function guardarUsuario(e) {
   pintarTablaUsuarios();
 }
 
-// ===== Pasar los datos de una fila al formulario =====
 function cargarUsuarioEnFormulario(id) {
   const u = buscar("users", "id", id);
   usuarioEditando = id;
 
   document.getElementById("u-id").value = u.id;
-  document.getElementById("u-id").disabled = true; // la identificación no se cambia
+  document.getElementById("u-id").disabled = true; 
   document.getElementById("u-nombre").value = u.nombre;
   document.getElementById("u-email").value = u.email;
   document.getElementById("u-telefono").value = u.telefono;
@@ -133,7 +125,6 @@ function cargarUsuarioEnFormulario(id) {
   document.getElementById("error-usuario").textContent = "";
 }
 
-// ===== Volver el formulario a modo "crear" =====
 function limpiarFormularioUsuario() {
   usuarioEditando = null;
   document.getElementById("form-usuario").reset();
@@ -144,7 +135,6 @@ function limpiarFormularioUsuario() {
   document.getElementById("error-usuario").textContent = "";
 }
 
-// ===== Eliminar =====
 function borrarUsuario(id) {
   if (id === usuarioActual().id) {
     alert("No puede eliminar su propio usuario mientras tiene la sesión abierta");
