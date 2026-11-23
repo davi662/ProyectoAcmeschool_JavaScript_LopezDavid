@@ -43,8 +43,11 @@ function vistaDatos() {
         ⏱ ${examenActual.tiempo} min · 🎯 Aprueba con ${examenActual.aprobacion}% · 📝 ${examenActual.preguntas.length} preguntas
       </p>
       <form id="form-datos">
-        <input id="est-id" placeholder="Número de identificación" required>
+        <input id="est-id" placeholder="Número de identificación" required
+               inputmode="numeric" pattern="[0-9]{6,10}"
+               title="Solo números, entre 6 y 10 dígitos">
         <input id="est-nombre" placeholder="Nombre completo" required>
+        <p class="error" id="error-datos"></p>
         <div class="fila-botones">
           <button type="button" class="btn-secundario" id="btn-volver">Volver</button>
           <button type="submit" class="btn">Comenzar examen</button>
@@ -59,14 +62,29 @@ function vistaDatos() {
 
   document.getElementById("form-datos").addEventListener("submit", (e) => {
     e.preventDefault();
-    estudianteActual = {
-      id: document.getElementById("est-id").value.trim(),
-      nombre: document.getElementById("est-nombre").value.trim()
-    };
+    const error = document.getElementById("error-datos");
+    const id = document.getElementById("est-id").value.trim();
+    const nombre = document.getElementById("est-nombre").value.trim();
+
+    // Solo números
+    if (!/^[0-9]{6,10}$/.test(id)) {
+      error.textContent = "La identificación debe tener solo números (entre 6 y 10 dígitos)";
+      return;
+    }
+
+    // ¿Ya presentó este examen?
+    const yaLoPresento = leer("results").some(
+      r => r.codigoExamen === examenActual.codigo && r.idEstudiante === id
+    );
+    if (yaLoPresento) {
+      error.textContent = "Usted ya presentó este examen. Solo se permite un intento.";
+      return;
+    }
+
+    estudianteActual = { id, nombre };
     location.hash = "#/presentar";
   });
 }
-
 function vistaPresentar() {
   if (!examenActual || !estudianteActual) { location.hash = "#/examenes"; return; }
   examenTerminado = false;

@@ -10,7 +10,9 @@ function vistaUsuarios() {
       <section class="tarjeta">
         <h3 id="titulo-form-usuario">Crear nuevo usuario</h3>
         <form id="form-usuario">
-          <input id="u-id" placeholder="Número de identificación" required>
+          <input id="u-id" placeholder="Número de identificación" required
+                 inputmode="numeric" pattern="[0-9]{6,10}"
+                 title="Solo números, entre 6 y 10 dígitos">
           <input id="u-nombre" placeholder="Nombre completo" required>
           <input id="u-email" type="email" placeholder="Email" required>
           <input id="u-telefono" type="tel" placeholder="Teléfono" required>
@@ -86,6 +88,11 @@ function guardarUsuario(e) {
     cargo: document.getElementById("u-cargo").value,
     password: document.getElementById("u-password").value
   };
+  
+  if (usuarioEditando === null && !/^[0-9]{6,10}$/.test(usuario.id)) {   // ← lo nuevo
+    error.textContent = "La identificación debe tener solo números (entre 6 y 10 dígitos)";
+    return;
+  }
 
   const conEseEmail = buscar("users", "email", usuario.email);
   if (conEseEmail && conEseEmail.id !== usuarioEditando) {
