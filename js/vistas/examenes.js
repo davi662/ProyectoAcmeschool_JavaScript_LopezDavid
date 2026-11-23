@@ -130,9 +130,9 @@ function limpiarFormularioExamen() {
 }
 
 function borrarExamen(codigo) {
-  if (!confirm("¿Seguro que desea eliminar este examen y todas sus preguntas?")) return;
-
+if (!confirm("¿Seguro que desea eliminar este examen? También se borrarán sus preguntas y los resultados de los estudiantes.")) return;
   eliminar("exams", "codigo", codigo);
+  eliminar("results", "codigoExamen", codigo);   
   if (examenEditando === codigo) limpiarFormularioExamen();
 
   const editor = document.querySelector("editor-preguntas");

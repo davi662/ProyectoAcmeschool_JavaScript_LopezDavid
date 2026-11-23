@@ -455,3 +455,43 @@ reloj-examen.poco-tiempo {
     align-items: flex-start;
   }
 }
+.filtro {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.etiqueta {
+  font-size: 12px;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+.etiqueta-exito {
+  background: #e3f8ee;
+  color: #00894a;
+}
+
+.etiqueta-error {
+  background: #fdeaea;
+  color: #c01f1f;
+}
+
+.fila-detalle td {
+  background: #fafafa;
+}
+
+.detalle-respuestas {
+  padding-left: 20px;
+  font-size: 14px;
+}
+
+.detalle-respuestas li {
+  margin: 10px 0;
+}
+
+.texto-exito { color: var(--color-exito); }
+.texto-error { color: var(--color-error); }

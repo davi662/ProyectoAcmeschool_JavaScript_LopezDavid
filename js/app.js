@@ -8,6 +8,7 @@ const rutas = {
   "#/login":            { vista: vistaLogin,           privada: false },
   "#/usuarios":         { vista: vistaUsuarios,        privada: true  },
   "#/gestion-examenes": { vista: vistaGestionExamenes, privada: true  },
+  "#/resultados": { vista: vistaResultados, privada: true },
 };
   
 function navegar() {
@@ -38,6 +39,7 @@ function actualizarHeader() {
     menu.innerHTML = `
       <a href="#/usuarios">Usuarios</a>
       <a href="#/gestion-examenes">Exámenes</a>
+      <a href="#/resultados">Resultados</a>
       <a href="#" id="salir">Salir (${usuarioActual().nombre})</a>
     `;
     document.getElementById("salir").addEventListener("click", (e) => {
