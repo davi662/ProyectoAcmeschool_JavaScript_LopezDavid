@@ -35,6 +35,8 @@ La primera vez que se abre la app se crea este usuario para poder ingresar:
 ```
 ├── index.html
 ├── README.md
+├── capturas/
+│   └── mockups/   
 ├── css/
 │   └── styles.css              → estilos, colores y animaciones
 └── js/
@@ -71,8 +73,9 @@ La primera vez que se abre la app se crea este usuario para poder ingresar:
 
 **results**
 ```json
-{ "codigoExamen": "MAT01", "idEstudiante": "2002", "nombreEstudiante": "Luis Gómez",
-  "respuestas": { "1732400000000": 1 }, "correctas": 1, "total": 1, "porcentaje": 100, "aprobado": true, "fecha": "2026-11-23T18:00:00.000Z" }
+{ "codigoExamen": "MAT01", "tituloExamen": "Matemáticas", "idEstudiante": "2002", "nombreEstudiante": "Luis Gómez",
+  "respuestas": { "1732400000000": 1 }, "correctas": 1, "total": 1, "porcentaje": 100,
+  "aprobacion": 60, "aprobado": true, "fecha": "2026-11-23T18:00:00.000Z" }
 ```
 
 La sesión del usuario se guarda en **sessionStorage**, por lo que se cierra al cerrar la pestaña.
@@ -82,11 +85,47 @@ La sesión del usuario se guarda en **sessionStorage**, por lo que se cierra al 
 - **`<editor-preguntas codigo="...">`**: permite agregar y eliminar las preguntas de un examen. Valida que cada pregunta tenga al menos 2 respuestas y una sola correcta. Avisa a la vista con el evento `preguntas-cambiaron`.
 - **`<reloj-examen minutos="...">`**: cuenta regresiva del examen. Calcula el tiempo según la hora de finalización, para que siga siendo exacto aunque se cambie de pestaña. Cambia a rojo en el último minuto y emite el evento `tiempo-agotado` al llegar a 0.
 
+### Reglas y validaciones
+- Cada estudiante puede presentar un mismo examen **una sola vez** (se valida con su número de identificación).
+- El número de identificación solo acepta números (entre 6 y 10 dígitos).
+- No se permiten usuarios con la misma identificación o el mismo email, ni exámenes con el mismo código.
+- La identificación de un usuario y el código de un examen no se pueden modificar, porque son los que identifican cada registro.
+- Al eliminar un examen se eliminan también sus preguntas y los resultados de los estudiantes.
+- Un usuario no puede eliminarse a sí mismo mientras tiene la sesión iniciada.
+- Solo se muestran en el inicio los exámenes que tienen al menos una pregunta.
+
 ## Diseño
 
 - Paleta de colores definida con variables CSS (`--color-principal`, `--color-exito`, `--color-error`, etc.).
 - Diseño responsive con CSS Grid, Flexbox y media queries.
 - Animaciones y transiciones en tarjetas, botones, editor de preguntas, reloj y resultado.
+
+## Mockups
+
+Diseño inicial de las vistas, hecho en Canva antes de programar. La versión final
+incluye mejoras que surgieron durante el desarrollo (botones de eliminar, menú en las
+vistas privadas, botón *Terminar* y vista de resultados).
+
+### Login
+![Inicio de sesión](capturas/mockups/login.png)
+
+### Inicio: exámenes disponibles
+![Exámenes disponibles](capturas/mockups/examenes.png)
+
+### Datos del estudiante
+![Datos del estudiante antes de empezar](capturas/mockups/ingreso.png)
+
+### Presentar examen
+![Examen en curso con el reloj](capturas/mockups/solucion.png)
+
+### Gestión de usuarios
+![Gestión de usuarios](capturas/mockups/usuarios.png)
+
+### Gestión de exámenes
+![Gestión de exámenes](capturas/mockups/crearexamenes.png)
+
+### Editor de preguntas
+![Creación de preguntas](capturas/mockups/crearexamenes2.png)
 
 ## Autor
 
