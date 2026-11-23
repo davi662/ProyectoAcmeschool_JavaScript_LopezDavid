@@ -2,13 +2,21 @@ const app = document.getElementById("app");
 
 const rutas = {
   "#/examenes":         { vista: vistaInicio,          privada: false },
+  "#/datos":            { vista: vistaDatos,           privada: false },
+  "#/presentar":        { vista: vistaPresentar,       privada: false },
+  "#/resultado":        { vista: vistaResultado,       privada: false },
   "#/login":            { vista: vistaLogin,           privada: false },
   "#/usuarios":         { vista: vistaUsuarios,        privada: true  },
   "#/gestion-examenes": { vista: vistaGestionExamenes, privada: true  },
 };
-
+  
 function navegar() {
   const hash = location.hash || "#/examenes";
+
+    if (examenEnCurso() && hash !== "#/presentar") {
+    finalizarExamen();
+    return;
+  }
   const ruta = rutas[hash] || rutas["#/examenes"];
 
   if (ruta.privada && !estaAutenticado()) {
@@ -78,8 +86,5 @@ function vistaLogin() {
 }
 
 
-function vistaInicio() {
-  app.innerHTML = `<section class="tarjeta"><h2>Exámenes disponibles</h2><p>Próximamente…</p></section>`;
-}
 
 
