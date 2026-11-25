@@ -12,7 +12,7 @@ const rutas = {
 };
   
 function navegar() {
-  const hash = location.hash || "#/examenes";
+  const hash = location.hash || "#/login";
 
     if (examenEnCurso() && hash !== "#/presentar") {
     finalizarExamen();

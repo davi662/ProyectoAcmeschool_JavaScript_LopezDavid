@@ -495,3 +495,25 @@ reloj-examen.poco-tiempo {
 
 .texto-exito { color: var(--color-exito); }
 .texto-error { color: var(--color-error); }
+
+.gestion > * {
+  min-width: 0;
+}
+
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px 16px;
+  }
+
+  nav a {
+    margin-left: 0;
+  }
+}
